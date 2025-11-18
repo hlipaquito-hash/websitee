@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About STEM Academy - Our Story & Team</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * { font-family: 'Inter', sans-serif; }
+        .nav-blur {
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.95);
+        }
+        .team-card {
+            transition: all 0.3s ease;
+            background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+        }
+        .team-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        .achievement-card {
+            transition: all 0.3s ease;
+        }
+        .achievement-card:hover {
+            transform: scale(1.05);
+        }
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        .scroll-reveal.revealed {
+            opacity: 1;
+            transform: translateY(0);
+            transition: all 0.6s ease;
+        }
+        .timeline-item {
+            position: relative;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 20px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: #e5e7eb;
+        }
+        .timeline-item:last-child::before {
+            display: none;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 nav-blur border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center space-x-3">
+                    <img src="resources/logo.png" alt="STEM Academy Logo" class="h-10 w-10">
+                    <span class="text-xl font-bold text-gray-900">STEM Academy</span>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html" class="text-gray-700 hover:text-blue-600 transition-colors">Home</a>
+                    <a href="programs.html" class="text-gray-700 hover:text-blue-600 transition-colors">Programs</a>
+                    <a href="registration.html" class="text-gray-700 hover:text-blue-600 transition-colors">Registration</a>
+                    <a href="about.html" class="text-blue-600 font-medium border-b-2 border-blue-600 pb-1">About</a>
+                    <a href="registration.html" class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors">Enroll Now</a>
+                </div>
+                <div class="md:hidden">
+                    <button id="mobile-menu-btn" class="text-gray-700 hover:text-blue-600">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-200">
+            <div class="px-4 py-2 space-y-2">
+                <a href="index.html" class="block py-2 text-gray-700">Home</a>
+                <a href="programs.html" class="block py-2 text-gray-700">Programs</a>
+                <a href="registration.html" class="block py-2 text-gray-700">Registration</a>
+                <a href="about.html" class="block py-2 text-blue-600 font-medium">About</a>
+                <a href="registration.html" class="block py-2 bg-blue-600 text-white px-4 rounded-lg">Enroll Now</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header Section -->
+    <section class="pt-24 pb-12 bg-gradient-to-br from-blue-600 to-blue-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h1 class="text-4xl lg:text-5xl font-bold text-white mb-6">About STEM Academy</h1>
+            <p class="text-xl text-blue-100 max-w-3xl mx-auto">
+                Empowering the next generation of innovators through exceptional STEM education and hands-on learning experiences.
+            </p>
+        </div>
+    </section>
+
+    <!-- Mission & Vision -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div class="scroll-reveal">
+                    <h2 class="text-4xl font-bold text-gray-900 mb-6">Our Mission</h2>
+                    <p class="text-lg text-gray-600 mb-6">
+                        At STEM Academy, we believe that every student has the potential to become a innovator and problem-solver. 
+                        Our mission is to provide accessible, high-quality STEM education that prepares students for the challenges 
+                        and opportunities of the 21st century.
+                    </p>
+                    <p class="text-lg text-gray-600 mb-8">
+                        Through hands-on learning, expert instruction, and a curriculum grounded in real-world applications, 
+                        we empower students to develop critical thinking skills, creativity, and confidence in their ability 
+                        to tackle complex problems.
+                    </p>
+                    <div class="grid grid-cols-2 gap-6">
+                        <div class="text-center">
+                            <div class="text-3xl font-bold text-blue-600 mb-2">500+</div>
+                            <div class="text-gray-600">Students Taught</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-3xl font-bold text-green-600 mb-2">98%</div>
+                            <div class="text-gray-600">Success Rate</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="scroll-reveal">
+                    <div class="bg-gradient-to-br from-blue-50 to-indigo-100 p-8 rounded-2xl">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-6">Our Vision</h3>
+                        <ul class="space-y-4 text-gray-700">
+                            <li class="flex items-start">
+                                <div class="w-6 h-6 bg-blue-600 rounded-full flex items-center justify-center mr-3 mt-1">
+                                    <span class="text-white text-xs">✓</span>
+                                </div>
+                                <span>Create a diverse community of young innovators</span>
+                            </li>
+                            <li class="flex items-start">
+                                <div class="w-6 h-6 bg-blue-600 rounded-full flex items-center justify-center mr-3 mt-1">
+                                    <span class="text-white text-xs">✓</span>
+                                </div>
+                                <span>Bridge the gap between education and industry</span>
+                            </li>
+                            <li class="flex items-start">
+                                <div class="w-6 h-6 bg-blue-600 rounded-full flex items-center justify-center mr-3 mt-1">
+                                    <span class="text-white text-xs">✓</span>
+                                </div>
+                                <span>Foster lifelong learning and curiosity</span>
+                            </li>
+                            <li class="flex items-start">
+                                <div class="w-6 h-6 bg-blue-600 rounded-full flex items-center justify-center mr-3 mt-1">
+                                    <span class="text-white text-xs">✓</span>
+                                </div>
+                                <span>Build tomorrow's leaders in STEM fields</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Story -->
+    <section class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 scroll-reveal">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">Our Story</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Founded in 2018 by a team of passionate educators and industry professionals, 
+                    STEM Academy has grown from a small after-school program to a leading STEM education provider.
+                </p>
+            </div>
+
+            <div class="max-w-4xl mx-auto">
+                <div class="space-y-12">
+                    <div class="timeline-item pl-16 scroll-reveal">
+                        <div class="absolute left-0 w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold">
+                            2018
+                        </div>
+                        <div class="bg-white p-6 rounded-lg shadow-lg">
+                            <h3 class="text-xl font-bold text-gray-900 mb-2">Foundation</h3>
+                            <p class="text-gray-600">
+                                STEM Academy was founded with a simple belief: every child deserves access to high-quality STEM education. 
+                                We started with just 15 students in a small classroom, focusing on hands-on learning and personalized attention.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item pl-16 scroll-reveal">
+                        <div class="absolute left-0 w-10 h-10 bg-green-600 rounded-full flex items-center justify-center text-white font-bold">
+                            2020
+                        </div>
+                        <div class="bg-white p-6 rounded-lg shadow-lg">
+                            <h3 class="text-xl font-bold text-gray-900 mb-2">Growth & Innovation</h3>
+                            <p class="text-gray-600">
+                                Despite global challenges, we adapted to virtual learning and expanded our programs. 
+                                Our student body grew to 150, and we introduced advanced robotics and coding programs.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item pl-16 scroll-reveal">
+                        <div class="absolute left-0 w-10 h-10 bg-orange-600 rounded-full flex items-center justify-center text-white font-bold">
+                            2023
+                        </div>
+                        <div class="bg-white p-6 rounded-lg shadow-lg">
+                            <h3 class="text-xl font-bold text-gray-900 mb-2">Excellence Recognized</h3>
+                            <p class="text-gray-600">
+                                Our students began winning regional and national competitions. We received the "Outstanding STEM Education Provider" 
+                                award and expanded to serve over 300 students across three locations.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item pl-16 scroll-reveal">
+                        <div class="absolute left-0 w-10 h-10 bg-purple-600 rounded-full flex items-center justify-center text-white font-bold">
+                            2025
+                        </div>
+                        <div class="bg-white p-6 rounded-lg shadow-lg">
+                            <h3 class="text-xl font-bold text-gray-900 mb-2">Future Forward</h3>
+                            <p class="text-gray-600">
+                                Today, we continue to innovate with AI integration, advanced laboratories, and industry partnerships. 
+                                Our alumni are pursuing STEM degrees at top universities around the world.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 scroll-reveal">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">Meet Our Expert Team</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Our passionate educators bring years of industry experience and academic expertise 
+                    to create an unparalleled learning environment for our students.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="team-card p-6 rounded-2xl shadow-lg text-center scroll-reveal">
+                    <div class="w-24 h-24 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-3xl font-bold text-blue-600">DR</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-2">Dr. Rachel Chen</h3>
+                    <p class="text-blue-600 font-medium mb-3">Founder & Director</p>
+                    <p class="text-gray-600 mb-4">
+                        PhD in Physics from MIT, 15+ years in STEM education. Former research scientist at NASA. 
+                        Passionate about making science accessible to all students.
+                    </p>
+                    <div class="flex justify-center space-x-2">
+                        <span class="px-3 py-1 bg-blue-100 text-blue-600 rounded-full text-sm">Physics</span>
+                        <span class="px-3 py-1 bg-green-100 text-green-600 rounded-full text-sm">Leadership</span>
+                    </div>
+                </div>
+
+                <div class="team-card p-6 rounded-2xl shadow-lg text-center scroll-reveal">
+                    <div class="w-24 h-24 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-3xl font-bold text-green-600">MS</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-2">Michael Rodriguez</h3>
+                    <p class="text-blue-600 font-medium mb-3">Head of Mathematics</p>
+                    <p class="text-gray-600 mb-4">
+                        MS in Applied Mathematics, former engineer at Google. Specializes in making complex 
+                        mathematical concepts engaging and understandable for students of all ages.
+                    </p>
+                    <div class="flex justify-center space-x-2">
+                        <span class="px-3 py-1 bg-purple-100 text-purple-600 rounded-full text-sm">Mathematics</span>
+                        <span class="px-3 py-1 bg-orange-100 text-orange-600 rounded-full text-sm">Engineering</span>
+                    </div>
+                </div>
+
+                <div class="team-card p-6 rounded-2xl shadow-lg text-center scroll-reveal">
+                    <div class="w-24 h-24 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-3xl font-bold text-purple-600">SK</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-2">Sarah Kim</h3>
+                    <p class="text-blue-600 font-medium mb-3">Technology Coordinator</p>
+                    <p class="text-gray-600 mb-4">
+                        Computer Science degree from Stanford, former software developer. Expert in robotics, 
+                        programming, and integrating cutting-edge technology into education.
+                    </p>
+                    <div class="flex justify-center space-x-2">
+                        <span class="px-3 py-1 bg-red-100 text-red-600 rounded-full text-sm">Programming</span>
+                        <span class="px-3 py-1 bg-yellow-100 text-yellow-600 rounded-full text-sm">Robotics</span>
+                    </div>
+                </div>
+
+                <div class="team-card p-6 rounded-2xl shadow-lg text-center scroll-reveal">
+                    <div class="w-24 h-24 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-3xl font-bold text-red-600">JW</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-2">Dr. James Wilson</h3>
+                    <p class="text-blue-600 font-medium mb-3">Senior Science Instructor</p>
+                    <p class="text-gray-600 mb-4">
+                        PhD in Chemistry, 20+ years teaching experience. Published researcher with expertise 
+                        in laboratory safety and experimental design for young learners.
+                    </p>
+                    <div class="flex justify-center space-x-2">
+                        <span class="px-3 py-1 bg-green-100 text-green-600 rounded-full text-sm">Chemistry</span>
+                        <span class="px-3 py-1 bg-blue-100 text-blue-600 rounded-full text-sm">Research</span>
+                    </div>
+                </div>
+
+                <div class="team-card p-6 rounded-2xl shadow-lg text-center scroll-reveal">
+                    <div class="w-24 h-24 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-3xl font-bold text-yellow-600">AP</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-2">Anna Patel</h3>
+                    <p class="text-blue-600 font-medium mb-3">Biology Specialist</p>
+                    <p class="text-gray-600 mb-4">
+                        MS in Biology, environmental science advocate. Develops innovative biology curricula 
+                        that connect classroom learning to real-world environmental challenges.
+                    </p>
+                    <div class="flex justify-center space-x-2">
+                        <span class="px-3 py-1 bg-green-100 text-green-600 rounded-full text-sm">Biology</span>
+                        <span class="px-3 py-1 bg-teal-100 text-teal-600 rounded-full text-sm">Environment</span>
+                    </div>
+                </div>
+
+                <div class="team-card p-6 rounded-2xl shadow-lg text-center scroll-reveal">
+                    <div class="w-24 h-24 bg-teal-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-3xl font-bold text-teal-600">DL</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-2">David Lee</h3>
+                    <p class="text-blue-600 font-medium mb-3">Student Success Coordinator</p>
+                    <p class="text-gray-600 mb-4">
+                        Education Psychology background, specializes in personalized learning approaches. 
+                        Works closely with students and families to ensure optimal learning outcomes.
+                    </p>
+                    <div class="flex justify-center space-x-2">
+                        <span class="px-3 py-1 bg-indigo-100 text-indigo-600 rounded-full text-sm">Psychology</span>
+                        <span class="px-3 py-1 bg-pink-100 text-pink-600 rounded-full text-sm">Support</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Achievements -->
+    <section class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 scroll-reveal">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">Our Achievements</h2>
+                <p class="text-xl text-gray-600">
+                    Recognition for our commitment to excellence in STEM education.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="achievement-card bg-white p-6 rounded-2xl shadow-lg text-center scroll-reveal">
+                    <div class="w-16 h-16 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-2xl">🏆</span>
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-900 mb-2">Outstanding STEM Provider</h3>
+                    <p class="text-gray-600 text-sm">National Education Excellence Award 2023</p>
+                </div>
+
+                <div class="achievement-card bg-white p-6 rounded-2xl shadow-lg text-center scroll-reveal">
+                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-2xl">🥇</span>
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-900 mb-2">Student Champions</h3>
+                    <p class="text-gray-600 text-sm">Regional Robotics Competition Winners 2024</p>
+                </div>
+
+                <div class="achievement-card bg-white p-6 rounded-2xl shadow-lg text-center scroll-reveal">
+                    <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-2xl">⭐</span>
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-900 mb-2">Top Rated</h3>
+                    <p class="text-gray-600 text-sm">4.9/5 stars from 200+ parent reviews</p>
+                </div>
+
+                <div class="achievement-card bg-white p-6 rounded-2xl shadow-lg text-center scroll-reveal">
+                    <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-2xl">🎓</span>
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-900 mb-2">College Success</h3>
+                    <p class="text-gray-600 text-sm">95% of alumni pursue STEM degrees</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 scroll-reveal">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">Get In Touch</h2>
+                <p class="text-xl text-gray-600">
+                    Ready to start your STEM journey? Contact us today to learn more about our programs.
+                </p>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-12">
+                <div class="scroll-reveal">
+                    <div class="space-y-8">
+                        <div class="flex items-start space-x-4">
+                            <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <span class="text-xl">📍</span>
+                            </div>
+                            <div>
+                                <h3 class="text-lg font-semibold text-gray-900 mb-2">Location</h3>
+                                <p class="text-gray-600">
+                                    123 Education Boulevard<br>
+                                    Science City, SC 12345<br>
+                                    United States
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start space-x-4">
+                            <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <span class="text-xl">📞</span>
+                            </div>
+                            <div>
+                                <h3 class="text-lg font-semibold text-gray-900 mb-2">Phone</h3>
+                                <p class="text-gray-600">
+                                    (555) 123-4567<br>
+                                    Monday - Friday: 8:00 AM - 6:00 PM
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start space-x-4">
+                            <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <span class="text-xl">📧</span>
+                            </div>
+                            <div>
+                                <h3 class="text-lg font-semibold text-gray-900 mb-2">Email</h3>
+                                <p class="text-gray-600">
+                                    info@stemacademy.edu<br>
+                                    admissions@stemacademy.edu
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="scroll-reveal">
+                    <div class="bg-gray-50 p-8 rounded-2xl">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-6">Send us a Message</h3>
+                        <form class="space-y-4">
+                            <div class="grid md:grid-cols-2 gap-4">
+                                <input type="text" placeholder="First Name" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                                <input type="text" placeholder="Last Name" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                            </div>
+                            <input type="email" placeholder="Email Address" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                            <input type="text" placeholder="Subject" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                            <textarea rows="4" placeholder="Your Message" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"></textarea>
+                            <button type="submit" class="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition-colors font-semibold">
+                                Send Message
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="py-20 bg-blue-600">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="scroll-reveal">
+                <h2 class="text-4xl font-bold text-white mb-6">Ready to Join Our Community?</h2>
+                <p class="text-xl text-blue-100 mb-8 max-w-3xl mx-auto">
+                    Take the first step towards STEM excellence. Enroll today and discover your potential.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="registration.html" class="bg-yellow-400 text-blue-900 px-8 py-4 rounded-lg font-semibold hover:bg-yellow-300 transition-colors">
+                        Start Registration
+                    </a>
+                    <a href="programs.html" class="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold hover:bg-white hover:text-blue-600 transition-colors">
+                        View Programs
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center space-x-3 mb-4">
+                        <img src="resources/logo.png" alt="STEM Academy Logo" class="h-8 w-8">
+                        <span class="text-lg font-bold">STEM Academy</span>
+                    </div>
+                    <p class="text-gray-400">
+                        Empowering the next generation of innovators through exceptional STEM education.
+                    </p>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Programs</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="programs.html#elementary" class="hover:text-white transition-colors">Elementary School</a></li>
+                        <li><a href="programs.html#junior" class="hover:text-white transition-colors">Junior High School</a></li>
+                        <li><a href="programs.html#senior" class="hover:text-white transition-colors">Senior High School</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Quick Links</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="registration.html" class="hover:text-white transition-colors">Registration</a></li>
+                        <li><a href="about.html" class="hover:text-white transition-colors">About Us</a></li>
+                        <li><a href="#contact" class="hover:text-white transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Contact Info</h3>
+                    <div class="space-y-2 text-gray-400">
+                        <p>📧 info@stemacademy.edu</p>
+                        <p>📞 (555) 123-4567</p>
+                        <p>📍 123 Education Blvd, Science City, SC 12345</p>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2025 STEM Academy. All rights reserved. Empowering future innovators.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="main.js"></script>
+</body>
+</html>

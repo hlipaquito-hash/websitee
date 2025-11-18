@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STEM Academy - Future-Ready Education for Young Innovators</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * { font-family: 'Inter', sans-serif; }
+        .hero-bg {
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 50%, #60a5fa 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('resources/hero-stem.jpg') center/cover;
+            opacity: 0.15;
+            z-index: 1;
+        }
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+        .particle-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+        .stat-card {
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .program-card {
+            transition: all 0.3s ease;
+            background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+        }
+        .program-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(59, 130, 246, 0.15);
+        }
+        .nav-blur {
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.95);
+        }
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        .scroll-reveal.revealed {
+            opacity: 1;
+            transform: translateY(0);
+            transition: all 0.6s ease;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 nav-blur border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center space-x-3">
+                    <img src="resources/logo.png" alt="STEM Academy Logo" class="h-10 w-10">
+                    <span class="text-xl font-bold text-gray-900">STEM Academy</span>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html" class="text-blue-600 font-medium border-b-2 border-blue-600 pb-1">Home</a>
+                    <a href="programs.html" class="text-gray-700 hover:text-blue-600 transition-colors">Programs</a>
+                    <a href="registration.html" class="text-gray-700 hover:text-blue-600 transition-colors">Registration</a>
+                    <a href="about.html" class="text-gray-700 hover:text-blue-600 transition-colors">About</a>
+                    <a href="registration.html" class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors">Enroll Now</a>
+                </div>
+                <div class="md:hidden">
+                    <button id="mobile-menu-btn" class="text-gray-700 hover:text-blue-600">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-200">
+            <div class="px-4 py-2 space-y-2">
+                <a href="index.html" class="block py-2 text-blue-600 font-medium">Home</a>
+                <a href="programs.html" class="block py-2 text-gray-700">Programs</a>
+                <a href="registration.html" class="block py-2 text-gray-700">Registration</a>
+                <a href="about.html" class="block py-2 text-gray-700">About</a>
+                <a href="registration.html" class="block py-2 bg-blue-600 text-white px-4 rounded-lg">Enroll Now</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-bg min-h-screen flex items-center pt-16">
+        <canvas id="particle-canvas" class="particle-bg"></canvas>
+        <div class="hero-content max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div class="text-white">
+                    <h1 class="text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+                        Shape the Future with
+                        <span class="text-yellow-300">STEM Excellence</span>
+                    </h1>
+                    <p class="text-xl mb-8 text-blue-100 leading-relaxed">
+                        Empowering elementary, junior high, and senior high school students with cutting-edge STEM education. 
+                        Build critical thinking, problem-solving skills, and prepare for tomorrow's challenges through hands-on learning.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 mb-12">
+                        <a href="registration.html" class="bg-yellow-400 text-blue-900 px-8 py-4 rounded-lg font-semibold hover:bg-yellow-300 transition-colors text-center">
+                            Start Your Journey
+                        </a>
+                        <a href="programs.html" class="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold hover:bg-white hover:text-blue-900 transition-colors text-center">
+                            Explore Programs
+                        </a>
+                    </div>
+                    <div class="grid grid-cols-3 gap-6">
+                        <div class="stat-card p-4 rounded-lg text-center">
+                            <div class="text-2xl font-bold text-yellow-300">98%</div>
+                            <div class="text-sm text-blue-100">Student Success</div>
+                        </div>
+                        <div class="stat-card p-4 rounded-lg text-center">
+                            <div class="text-2xl font-bold text-yellow-300">500+</div>
+                            <div class="text-sm text-blue-100">Students Taught</div>
+                        </div>
+                        <div class="stat-card p-4 rounded-lg text-center">
+                            <div class="text-2xl font-bold text-yellow-300">15:1</div>
+                            <div class="text-sm text-blue-100">Student Ratio</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="relative">
+                    <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20">
+                        <h3 class="text-white text-xl font-semibold mb-6">Why Choose STEM Academy?</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-2 h-2 bg-yellow-300 rounded-full"></div>
+                                <span class="text-blue-100">Research-backed curriculum</span>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <div class="w-2 h-2 bg-yellow-300 rounded-full"></div>
+                                <span class="text-blue-100">Expert instructors</span>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <div class="w-2 h-2 bg-yellow-300 rounded-full"></div>
+                                <span class="text-blue-100">Hands-on learning</span>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <div class="w-2 h-2 bg-yellow-300 rounded-full"></div>
+                                <span class="text-blue-100">Future-ready skills</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Programs Overview -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 scroll-reveal">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">Programs for Every Level</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Tailored STEM education programs designed to meet students at their level and guide them toward excellence.
+                </p>
+            </div>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="program-card p-8 rounded-2xl shadow-lg scroll-reveal">
+                    <div class="mb-6">
+                        <img src="resources/elementary-stem.jpg" alt="Elementary STEM Program" class="w-full h-48 object-cover rounded-lg">
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Elementary School</h3>
+                    <p class="text-gray-600 mb-6">
+                        Grades K-6 • Foundation building through interactive experiments, basic coding, and mathematical concepts. 
+                        Spark curiosity and develop problem-solving skills early.
+                    </p>
+                    <ul class="space-y-2 mb-6">
+                        <li class="flex items-center text-gray-600">
+                            <span class="w-2 h-2 bg-blue-600 rounded-full mr-3"></span>
+                            Hands-on science experiments
+                        </li>
+                        <li class="flex items-center text-gray-600">
+                            <span class="w-2 h-2 bg-blue-600 rounded-full mr-3"></span>
+                            Basic programming concepts
+                        </li>
+                        <li class="flex items-center text-gray-600">
+                            <span class="w-2 h-2 bg-blue-600 rounded-full mr-3"></span>
+                            Mathematical thinking
+                        </li>
+                    </ul>
+                    <a href="programs.html#elementary" class="inline-block bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors">
+                        Learn More
+                    </a>
+                </div>
+
+                <div class="program-card p-8 rounded-2xl shadow-lg scroll-reveal">
+                    <div class="mb-6">
+                        <img src="resources/junior-stem.jpg" alt="Junior High STEM Program" class="w-full h-48 object-cover rounded-lg">
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Junior High School</h3>
+                    <p class="text-gray-600 mb-6">
+                        Grades 7-9 • Intermediate concepts in physics, chemistry, biology, and advanced mathematics. 
+                        Build analytical thinking and laboratory skills.
+                    </p>
+                    <ul class="space-y-2 mb-6">
+                        <li class="flex items-center text-gray-600">
+                            <span class="w-2 h-2 bg-green-600 rounded-full mr-3"></span>
+                            Laboratory experiments
+                        </li>
+                        <li class="flex items-center text-gray-600">
+                            <span class="w-2 h-2 bg-green-600 rounded-full mr-3"></span>
+                            Robotics and engineering
+                        </li>
+                        <li class="flex items-center text-gray-600">
+                            <span class="w-2 h-2 bg-green-600 rounded-full mr-3"></span>
+                            Data analysis projects
+                        </li>
+                    </ul>
+                    <a href="programs.html#junior" class="inline-block bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition-colors">
+                        Learn More
+                    </a>
+                </div>
+
+                <div class="program-card p-8 rounded-2xl shadow-lg scroll-reveal">
+                    <div class="mb-6">
+                        <img src="resources/high-school-lab.jpg" alt="Senior High STEM Program" class="w-full h-48 object-cover rounded-lg">
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Senior High School</h3>
+                    <p class="text-gray-600 mb-6">
+                        Grades 10-12 • Advanced placement preparation, research projects, and career-focused learning. 
+                        Prepare for university and professional success.
+                    </p>
+                    <ul class="space-y-2 mb-6">
+                        <li class="flex items-center text-gray-600">
+                            <span class="w-2 h-2 bg-orange-600 rounded-full mr-3"></span>
+                            AP exam preparation
+                        </li>
+                        <li class="flex items-center text-gray-600">
+                            <span class="w-2 h-2 bg-orange-600 rounded-full mr-3"></span>
+                            Independent research
+                        </li>
+                        <li class="flex items-center text-gray-600">
+                            <span class="w-2 h-2 bg-orange-600 rounded-full mr-3"></span>
+                            Career exploration
+                        </li>
+                    </ul>
+                    <a href="programs.html#senior" class="inline-block bg-orange-600 text-white px-6 py-3 rounded-lg hover:bg-orange-700 transition-colors">
+                        Learn More
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits & Statistics -->
+    <section class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div class="scroll-reveal">
+                    <h2 class="text-4xl font-bold text-gray-900 mb-6">Why STEM Education Matters</h2>
+                    <p class="text-lg text-gray-600 mb-8">
+                        Research shows that STEM education has a significant positive impact on student learning outcomes, 
+                        with high school students showing the greatest benefits (54% improvement effect).
+                    </p>
+                    <div class="space-y-6">
+                        <div class="flex items-start space-x-4">
+                            <div class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="text-lg font-semibold text-gray-900 mb-2">Enhanced Problem-Solving Skills</h3>
+                                <p class="text-gray-600">Students develop critical thinking abilities that transfer to all academic areas.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-4">
+                            <div class="w-8 h-8 bg-green-600 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3z"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="text-lg font-semibold text-gray-900 mb-2">Collaboration & Communication</h3>
+                                <p class="text-gray-600">Team-based projects build essential interpersonal skills for future success.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-4">
+                            <div class="w-8 h-8 bg-orange-600 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="text-lg font-semibold text-gray-900 mb-2">Real-World Application</h3>
+                                <p class="text-gray-600">Connect classroom learning to practical challenges and career opportunities.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="scroll-reveal">
+                    <div id="benefits-chart" class="w-full h-96 bg-white rounded-2xl shadow-lg p-6"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Success Stories -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 scroll-reveal">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">Student Success Stories</h2>
+                <p class="text-xl text-gray-600">
+                    Hear from our students and parents about their transformative STEM Academy experience.
+                </p>
+            </div>
+            <div class="splide" id="testimonials-slider">
+                <div class="splide__track">
+                    <ul class="splide__list">
+                        <li class="splide__slide">
+                            <div class="bg-gray-50 p-8 rounded-2xl mx-4">
+                                <div class="flex items-center mb-6">
+                                    <div class="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold text-xl">
+                                        A
+                                    </div>
+                                    <div class="ml-4">
+                                        <h4 class="font-semibold text-gray-900">Alex Chen</h4>
+                                        <p class="text-gray-600">Grade 11 • Senior High Program</p>
+                                    </div>
+                                </div>
+                                <p class="text-gray-700 mb-4">
+                                    "STEM Academy completely changed my perspective on learning. The hands-on projects and expert guidance helped me discover my passion for engineering. I recently won first place in the regional robotics competition!"
+                                </p>
+                                <div class="flex text-yellow-400">
+                                    <span>★★★★★</span>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="splide__slide">
+                            <div class="bg-gray-50 p-8 rounded-2xl mx-4">
+                                <div class="flex items-center mb-6">
+                                    <div class="w-16 h-16 bg-green-600 rounded-full flex items-center justify-center text-white font-bold text-xl">
+                                        M
+                                    </div>
+                                    <div class="ml-4">
+                                        <h4 class="font-semibold text-gray-900">Maria Rodriguez</h4>
+                                        <p class="text-gray-600">Parent • Elementary Program</p>
+                                    </div>
+                                </div>
+                                <p class="text-gray-700 mb-4">
+                                    "My daughter Emma used to struggle with math, but after joining STEM Academy, she's not only improved her grades but genuinely enjoys learning. The teachers make complex concepts fun and accessible."
+                                </p>
+                                <div class="flex text-yellow-400">
+                                    <span>★★★★★</span>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="splide__slide">
+                            <div class="bg-gray-50 p-8 rounded-2xl mx-4">
+                                <div class="flex items-center mb-6">
+                                    <div class="w-16 h-16 bg-orange-600 rounded-full flex items-center justify-center text-white font-bold text-xl">
+                                        D
+                                    </div>
+                                    <div class="ml-4">
+                                        <h4 class="font-semibold text-gray-900">David Kim</h4>
+                                        <p class="text-gray-600">Grade 8 • Junior High Program</p>
+                                    </div>
+                                </div>
+                                <p class="text-gray-700 mb-4">
+                                    "The chemistry experiments and robotics projects are amazing! I've learned so much about how things work in the real world. My confidence in science has grown tremendously."
+                                </p>
+                                <div class="flex text-yellow-400">
+                                    <span>★★★★★</span>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="py-20 bg-blue-600">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="scroll-reveal">
+                <h2 class="text-4xl font-bold text-white mb-6">Ready to Start Your STEM Journey?</h2>
+                <p class="text-xl text-blue-100 mb-8 max-w-3xl mx-auto">
+                    Join hundreds of students who are already building the skills they need for future success. 
+                    Enroll today and take the first step toward STEM excellence.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="registration.html" class="bg-yellow-400 text-blue-900 px-8 py-4 rounded-lg font-semibold hover:bg-yellow-300 transition-colors">
+                        Enroll Now
+                    </a>
+                    <a href="programs.html" class="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold hover:bg-white hover:text-blue-600 transition-colors">
+                        View Programs
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center space-x-3 mb-4">
+                        <img src="resources/logo.png" alt="STEM Academy Logo" class="h-8 w-8">
+                        <span class="text-lg font-bold">STEM Academy</span>
+                    </div>
+                    <p class="text-gray-400">
+                        Empowering the next generation of innovators through exceptional STEM education.
+                    </p>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Programs</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="programs.html#elementary" class="hover:text-white transition-colors">Elementary School</a></li>
+                        <li><a href="programs.html#junior" class="hover:text-white transition-colors">Junior High School</a></li>
+                        <li><a href="programs.html#senior" class="hover:text-white transition-colors">Senior High School</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Quick Links</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="registration.html" class="hover:text-white transition-colors">Registration</a></li>
+                        <li><a href="about.html" class="hover:text-white transition-colors">About Us</a></li>
+                        <li><a href="about.html#contact" class="hover:text-white transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Contact Info</h3>
+                    <div class="space-y-2 text-gray-400">
+                        <p>📧 info@stemacademy.edu</p>
+                        <p>📞 (555) 123-4567</p>
+                        <p>📍 123 Education Blvd, Science City, SC 12345</p>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2025 STEM Academy. All rights reserved. Empowering future innovators.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="main.js"></script>
+</body>
+</html>

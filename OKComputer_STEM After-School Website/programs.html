@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STEM Programs - Comprehensive Curriculum for All Levels</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * { font-family: 'Inter', sans-serif; }
+        .nav-blur {
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.95);
+        }
+        .program-tab {
+            transition: all 0.3s ease;
+        }
+        .program-tab.active {
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(59, 130, 246, 0.3);
+        }
+        .subject-card {
+            transition: all 0.3s ease;
+            background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+        }
+        .subject-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        }
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        .scroll-reveal.revealed {
+            opacity: 1;
+            transform: translateY(0);
+            transition: all 0.6s ease;
+        }
+        .difficulty-bar {
+            height: 4px;
+            border-radius: 2px;
+            background: linear-gradient(90deg, #10b981 0%, #f59e0b 50%, #ef4444 100%);
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 nav-blur border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center space-x-3">
+                    <img src="resources/logo.png" alt="STEM Academy Logo" class="h-10 w-10">
+                    <span class="text-xl font-bold text-gray-900">STEM Academy</span>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html" class="text-gray-700 hover:text-blue-600 transition-colors">Home</a>
+                    <a href="programs.html" class="text-blue-600 font-medium border-b-2 border-blue-600 pb-1">Programs</a>
+                    <a href="registration.html" class="text-gray-700 hover:text-blue-600 transition-colors">Registration</a>
+                    <a href="about.html" class="text-gray-700 hover:text-blue-600 transition-colors">About</a>
+                    <a href="registration.html" class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors">Enroll Now</a>
+                </div>
+                <div class="md:hidden">
+                    <button id="mobile-menu-btn" class="text-gray-700 hover:text-blue-600">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-200">
+            <div class="px-4 py-2 space-y-2">
+                <a href="index.html" class="block py-2 text-gray-700">Home</a>
+                <a href="programs.html" class="block py-2 text-blue-600 font-medium">Programs</a>
+                <a href="registration.html" class="block py-2 text-gray-700">Registration</a>
+                <a href="about.html" class="block py-2 text-gray-700">About</a>
+                <a href="registration.html" class="block py-2 bg-blue-600 text-white px-4 rounded-lg">Enroll Now</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header Section -->
+    <section class="pt-24 pb-12 bg-gradient-to-br from-blue-600 to-blue-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h1 class="text-4xl lg:text-5xl font-bold text-white mb-6">Comprehensive STEM Programs</h1>
+            <p class="text-xl text-blue-100 max-w-3xl mx-auto">
+                Discover our carefully crafted curriculum designed to inspire and challenge students at every educational level.
+            </p>
+        </div>
+    </section>
+
+    <!-- Program Level Tabs -->
+    <section class="py-12 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-wrap justify-center gap-4 mb-12">
+                <button class="program-tab active px-8 py-4 rounded-xl font-semibold" data-level="elementary">
+                    Elementary School (K-6)
+                </button>
+                <button class="program-tab px-8 py-4 rounded-xl font-semibold bg-gray-100 text-gray-700 hover:bg-gray-200" data-level="junior">
+                    Junior High (7-9)
+                </button>
+                <button class="program-tab px-8 py-4 rounded-xl font-semibold bg-gray-100 text-gray-700 hover:bg-gray-200" data-level="senior">
+                    Senior High (10-12)
+                </button>
+            </div>
+
+            <!-- Elementary School Program -->
+            <div id="elementary-program" class="program-content">
+                <div class="text-center mb-12 scroll-reveal">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-4">Elementary School Program (K-6)</h2>
+                    <p class="text-lg text-gray-600 max-w-4xl mx-auto">
+                        Building strong foundations in STEM through interactive learning, hands-on experiments, and age-appropriate challenges. 
+                        Our elementary program focuses on sparking curiosity and developing problem-solving skills that last a lifetime.
+                    </p>
+                </div>
+
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+                    <div class="subject-card p-6 rounded-2xl shadow-lg scroll-reveal">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mr-4">
+                                <span class="text-2xl">🔬</span>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-900">Science Discovery</h3>
+                        </div>
+                        <p class="text-gray-600 mb-4">
+                            Explore the natural world through hands-on experiments, observation, and scientific inquiry.
+                        </p>
+                        <div class="mb-4">
+                            <div class="flex justify-between text-sm text-gray-500 mb-1">
+                                <span>Difficulty Level</span>
+                                <span>Beginner</span>
+                            </div>
+                            <div class="difficulty-bar bg-gradient-to-r from-green-400 to-green-600"></div>
+                        </div>
+                        <ul class="space-y-2 text-sm text-gray-600">
+                            <li>• Simple chemistry experiments</li>
+                            <li>• Plant and animal studies</li>
+                            <li>• Weather and climate basics</li>
+                            <li>• Physics of motion and energy</li>
+                        </ul>
+                    </div>
+
+                    <div class="subject-card p-6 rounded-2xl shadow-lg scroll-reveal">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mr-4">
+                                <span class="text-2xl">📊</span>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-900">Mathematical Thinking</h3>
+                        </div>
+                        <p class="text-gray-600 mb-4">
+                            Develop logical reasoning and mathematical concepts through games and real-world applications.
+                        </p>
+                        <div class="mb-4">
+                            <div class="flex justify-between text-sm text-gray-500 mb-1">
+                                <span>Difficulty Level</span>
+                                <span>Beginner</span>
+                            </div>
+                            <div class="difficulty-bar bg-gradient-to-r from-green-400 to-green-600"></div>
+                        </div>
+                        <ul class="space-y-2 text-sm text-gray-600">
+                            <li>• Number patterns and sequences</li>
+                            <li>• Geometry and spatial reasoning</li>
+                            <li>• Data collection and graphs</li>
+                            <li>• Problem-solving strategies</li>
+                        </ul>
+                    </div>
+
+                    <div class="subject-card p-6 rounded-2xl shadow-lg scroll-reveal">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mr-4">
+                                <span class="text-2xl">💻</span>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-900">Technology Basics</h3>
+                        </div>
+                        <p class="text-gray-600 mb-4">
+                            Introduction to coding, robotics, and digital tools through playful exploration.
+                        </p>
+                        <div class="mb-4">
+                            <div class="flex justify-between text-sm text-gray-500 mb-1">
+                                <span>Difficulty Level</span>
+                                <span>Beginner</span>
+                            </div>
+                            <div class="difficulty-bar bg-gradient-to-r from-green-400 to-yellow-400"></div>
+                        </div>
+                        <ul class="space-y-2 text-sm text-gray-600">
+                            <li>• Block-based programming</li>
+                            <li>• Simple robotics projects</li>
+                            <li>• Digital citizenship</li>
+                            <li>• Creative technology tools</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="bg-blue-50 p-8 rounded-2xl scroll-reveal">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Program Highlights</h3>
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div>
+                            <h4 class="text-lg font-semibold text-gray-900 mb-3">Learning Outcomes</h4>
+                            <ul class="space-y-2 text-gray-600">
+                                <li>• Develop scientific curiosity and observation skills</li>
+                                <li>• Build mathematical confidence and number sense</li>
+                                <li>• Learn basic programming logic and computational thinking</li>
+                                <li>• Practice collaboration and communication skills</li>
+                                <li>• Understand real-world applications of STEM concepts</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-semibold text-gray-900 mb-3">Program Details</h4>
+                            <ul class="space-y-2 text-gray-600">
+                                <li>• Class Size: Maximum 12 students</li>
+                                <li>• Duration: 2 hours per week</li>
+                                <li>• Schedule: Weekday afternoons & weekends</li>
+                                <li>• Assessment: Portfolio-based evaluation</li>
+                                <li>• Materials: All equipment provided</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Junior High Program -->
+            <div id="junior-program" class="program-content hidden">
+                <div class="text-center mb-12 scroll-reveal">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-4">Junior High School Program (7-9)</h2>
+                    <p class="text-lg text-gray-600 max-w-4xl mx-auto">
+                        Intermediate STEM concepts with increased complexity and laboratory work. Students develop analytical thinking, 
+                        advanced problem-solving skills, and begin exploring specialized areas of interest.
+                    </p>
+                </div>
+
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+                    <div class="subject-card p-6 rounded-2xl shadow-lg scroll-reveal">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center mr-4">
+                                <span class="text-2xl">⚛️</span>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-900">Advanced Science</h3>
+                        </div>
+                        <p class="text-gray-600 mb-4">
+                            Deep dive into chemistry, physics, and biology with laboratory experiments and data analysis.
+                        </p>
+                        <div class="mb-4">
+                            <div class="flex justify-between text-sm text-gray-500 mb-1">
+                                <span>Difficulty Level</span>
+                                <span>Intermediate</span>
+                            </div>
+                            <div class="difficulty-bar bg-gradient-to-r from-yellow-400 to-orange-400"></div>
+                        </div>
+                        <ul class="space-y-2 text-sm text-gray-600">
+                            <li>• Chemical reactions and stoichiometry</li>
+                            <li>• Physics of forces and energy</li>
+                            <li>• Cellular biology and genetics</li>
+                            <li>• Scientific method and research</li>
+                        </ul>
+                    </div>
+
+                    <div class="subject-card p-6 rounded-2xl shadow-lg scroll-reveal">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 bg-indigo-100 rounded-lg flex items-center justify-center mr-4">
+                                <span class="text-2xl">🤖</span>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-900">Engineering & Robotics</h3>
+                        </div>
+                        <p class="text-gray-600 mb-4">
+                            Design, build, and program robots while learning engineering principles and teamwork.
+                        </p>
+                        <div class="mb-4">
+                            <div class="flex justify-between text-sm text-gray-500 mb-1">
+                                <span>Difficulty Level</span>
+                                <span>Intermediate</span>
+                            </div>
+                            <div class="difficulty-bar bg-gradient-to-r from-yellow-400 to-orange-400"></div>
+                        </div>
+                        <ul class="space-y-2 text-sm text-gray-600">
+                            <li>• Mechanical design and construction</li>
+                            <li>• Programming with sensors</li>
+                            <li>• Team-based robotics challenges</li>
+                            <li>• Engineering design process</li>
+                        </ul>
+                    </div>
+
+                    <div class="subject-card p-6 rounded-2xl shadow-lg scroll-reveal">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 bg-teal-100 rounded-lg flex items-center justify-center mr-4">
+                                <span class="text-2xl">📈</span>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-900">Data Science</h3>
+                        </div>
+                        <p class="text-gray-600 mb-4">
+                            Learn to collect, analyze, and visualize data using modern tools and statistical methods.
+                        </p>
+                        <div class="mb-4">
+                            <div class="flex justify-between text-sm text-gray-500 mb-1">
+                                <span>Difficulty Level</span>
+                                <span>Intermediate</span>
+                            </div>
+                            <div class="difficulty-bar bg-gradient-to-r from-yellow-400 to-orange-400"></div>
+                        </div>
+                        <ul class="space-y-2 text-sm text-gray-600">
+                            <li>• Statistical analysis and probability</li>
+                            <li>• Data visualization techniques</li>
+                            <li>• Spreadsheet and database skills</li>
+                            <li>• Real-world data projects</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="bg-green-50 p-8 rounded-2xl scroll-reveal">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Program Highlights</h3>
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div>
+                            <h4 class="text-lg font-semibold text-gray-900 mb-3">Learning Outcomes</h4>
+                            <ul class="space-y-2 text-gray-600">
+                                <li>• Master intermediate scientific concepts and lab techniques</li>
+                                <li>• Develop engineering design and problem-solving skills</li>
+                                <li>• Learn data analysis and statistical reasoning</li>
+                                <li>• Build teamwork and project management abilities</li>
+                                <li>• Prepare for advanced high school coursework</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-semibold text-gray-900 mb-3">Program Details</h4>
+                            <ul class="space-y-2 text-gray-600">
+                                <li>• Class Size: Maximum 10 students</li>
+                                <li>• Duration: 3 hours per week</li>
+                                <li>• Schedule: Weekday evenings & weekends</li>
+                                <li>• Assessment: Project-based evaluation</li>
+                                <li>• Prerequisites: Elementary STEM completion</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Senior High Program -->
+            <div id="senior-program" class="program-content hidden">
+                <div class="text-center mb-12 scroll-reveal">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-4">Senior High School Program (10-12)</h2>
+                    <p class="text-lg text-gray-600 max-w-4xl mx-auto">
+                        Advanced placement preparation, independent research projects, and career-focused learning. 
+                        Prepare for university success and professional STEM careers.
+                    </p>
+                </div>
+
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+                    <div class="subject-card p-6 rounded-2xl shadow-lg scroll-reveal">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mr-4">
+                                <span class="text-2xl">🧬</span>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-900">Advanced Science</h3>
+                        </div>
+                        <p class="text-gray-600 mb-4">
+                            AP-level coursework in biology, chemistry, and physics with independent research projects.
+                        </p>
+                        <div class="mb-4">
+                            <div class="flex justify-between text-sm text-gray-500 mb-1">
+                                <span>Difficulty Level</span>
+                                <span>Advanced</span>
+                            </div>
+                            <div class="difficulty-bar bg-gradient-to-r from-orange-400 to-red-500"></div>
+                        </div>
+                        <ul class="space-y-2 text-sm text-gray-600">
+                            <li>• AP Biology, Chemistry, Physics</li>
+                            <li>• Independent research methodology</li>
+                            <li>• Advanced laboratory techniques</li>
+                            <li>• Scientific writing and presentation</li>
+                        </ul>
+                    </div>
+
+                    <div class="subject-card p-6 rounded-2xl shadow-lg scroll-reveal">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center mr-4">
+                                <span class="text-2xl">💻</span>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-900">Computer Science</h3>
+                        </div>
+                        <p class="text-gray-600 mb-4">
+                            Programming, algorithms, and software development with real-world applications.
+                        </p>
+                        <div class="mb-4">
+                            <div class="flex justify-between text-sm text-gray-500 mb-1">
+                                <span>Difficulty Level</span>
+                                <span>Advanced</span>
+                            </div>
+                            <div class="difficulty-bar bg-gradient-to-r from-orange-400 to-red-500"></div>
+                        </div>
+                        <ul class="space-y-2 text-sm text-gray-600">
+                            <li>• Java/Python programming</li>
+                            <li>• Data structures and algorithms</li>
+                            <li>• Web and mobile development</li>
+                            <li>• Machine learning basics</li>
+                        </ul>
+                    </div>
+
+                    <div class="subject-card p-6 rounded-2xl shadow-lg scroll-reveal">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 bg-pink-100 rounded-lg flex items-center justify-center mr-4">
+                                <span class="text-2xl">🚀</span>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-900">Engineering Design</h3>
+                        </div>
+                        <p class="text-gray-600 mb-4">
+                            Capstone projects, engineering principles, and preparation for university engineering programs.
+                        </p>
+                        <div class="mb-4">
+                            <div class="flex justify-between text-sm text-gray-500 mb-1">
+                                <span>Difficulty Level</span>
+                                <span>Advanced</span>
+                            </div>
+                            <div class="difficulty-bar bg-gradient-to-r from-orange-400 to-red-500"></div>
+                        </div>
+                        <ul class="space-y-2 text-sm text-gray-600">
+                            <li>• Engineering design process</li>
+                            <li>• CAD modeling and 3D printing</li>
+                            <li>• Capstone project development</li>
+                            <li>• University preparation</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="bg-orange-50 p-8 rounded-2xl scroll-reveal">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Program Highlights</h3>
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div>
+                            <h4 class="text-lg font-semibold text-gray-900 mb-3">Learning Outcomes</h4>
+                            <ul class="space-y-2 text-gray-600">
+                                <li>• Master advanced STEM concepts and AP-level content</li>
+                                <li>• Conduct independent research and complete capstone projects</li>
+                                <li>• Develop professional programming and technical skills</li>
+                                <li>• Build college-ready portfolio and resume</li>
+                                <li>• Prepare for STEM careers and university programs</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-semibold text-gray-900 mb-3">Program Details</h4>
+                            <ul class="space-y-2 text-gray-600">
+                                <li>• Class Size: Maximum 8 students</li>
+                                <li>• Duration: 4 hours per week</li>
+                                <li>• Schedule: Flexible evening & weekend options</li>
+                                <li>• Assessment: Research projects and AP prep</li>
+                                <li>• Prerequisites: Junior High STEM or equivalent</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="py-20 bg-blue-600">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="scroll-reveal">
+                <h2 class="text-4xl font-bold text-white mb-6">Ready to Join Our STEM Program?</h2>
+                <p class="text-xl text-blue-100 mb-8 max-w-3xl mx-auto">
+                    Choose the program that best fits your level and start your journey toward STEM excellence today.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="registration.html" class="bg-yellow-400 text-blue-900 px-8 py-4 rounded-lg font-semibold hover:bg-yellow-300 transition-colors">
+                        Register Now
+                    </a>
+                    <a href="about.html" class="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold hover:bg-white hover:text-blue-600 transition-colors">
+                        Learn More About Us
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center space-x-3 mb-4">
+                        <img src="resources/logo.png" alt="STEM Academy Logo" class="h-8 w-8">
+                        <span class="text-lg font-bold">STEM Academy</span>
+                    </div>
+                    <p class="text-gray-400">
+                        Empowering the next generation of innovators through exceptional STEM education.
+                    </p>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Programs</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#elementary" class="hover:text-white transition-colors">Elementary School</a></li>
+                        <li><a href="#junior" class="hover:text-white transition-colors">Junior High School</a></li>
+                        <li><a href="#senior" class="hover:text-white transition-colors">Senior High School</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Quick Links</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="registration.html" class="hover:text-white transition-colors">Registration</a></li>
+                        <li><a href="about.html" class="hover:text-white transition-colors">About Us</a></li>
+                        <li><a href="about.html#contact" class="hover:text-white transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Contact Info</h3>
+                    <div class="space-y-2 text-gray-400">
+                        <p>📧 info@stemacademy.edu</p>
+                        <p>📞 (555) 123-4567</p>
+                        <p>📍 123 Education Blvd, Science City, SC 12345</p>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2025 STEM Academy. All rights reserved. Empowering future innovators.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="main.js"></script>
+</body>
+</html>

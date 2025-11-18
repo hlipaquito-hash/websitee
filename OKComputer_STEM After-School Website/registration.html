@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration - Join STEM Academy</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * { font-family: 'Inter', sans-serif; }
+        .nav-blur {
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.95);
+        }
+        .step-indicator {
+            transition: all 0.3s ease;
+        }
+        .step-indicator.active {
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+            color: white;
+            transform: scale(1.1);
+        }
+        .step-indicator.completed {
+            background: #10b981;
+            color: white;
+        }
+        .form-step {
+            display: none;
+        }
+        .form-step.active {
+            display: block;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .course-card {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .course-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        .course-card.selected {
+            border-color: #3b82f6;
+            background: linear-gradient(145deg, #eff6ff, #dbeafe);
+        }
+        .schedule-slot {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .schedule-slot:hover {
+            background: #f3f4f6;
+        }
+        .schedule-slot.selected {
+            background: #3b82f6;
+            color: white;
+        }
+        .form-input {
+            transition: all 0.3s ease;
+        }
+        .form-input:focus {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(59, 130, 246, 0.15);
+        }
+        .progress-bar {
+            transition: width 0.5s ease;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 nav-blur border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center space-x-3">
+                    <img src="resources/logo.png" alt="STEM Academy Logo" class="h-10 w-10">
+                    <span class="text-xl font-bold text-gray-900">STEM Academy</span>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html" class="text-gray-700 hover:text-blue-600 transition-colors">Home</a>
+                    <a href="programs.html" class="text-gray-700 hover:text-blue-600 transition-colors">Programs</a>
+                    <a href="registration.html" class="text-blue-600 font-medium border-b-2 border-blue-600 pb-1">Registration</a>
+                    <a href="about.html" class="text-gray-700 hover:text-blue-600 transition-colors">About</a>
+                    <a href="registration.html" class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors">Enroll Now</a>
+                </div>
+                <div class="md:hidden">
+                    <button id="mobile-menu-btn" class="text-gray-700 hover:text-blue-600">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-200">
+            <div class="px-4 py-2 space-y-2">
+                <a href="index.html" class="block py-2 text-gray-700">Home</a>
+                <a href="programs.html" class="block py-2 text-gray-700">Programs</a>
+                <a href="registration.html" class="block py-2 text-blue-600 font-medium">Registration</a>
+                <a href="about.html" class="block py-2 text-gray-700">About</a>
+                <a href="registration.html" class="block py-2 bg-blue-600 text-white px-4 rounded-lg">Enroll Now</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header Section -->
+    <section class="pt-24 pb-12 bg-gradient-to-br from-blue-600 to-blue-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h1 class="text-4xl lg:text-5xl font-bold text-white mb-6">Join STEM Academy</h1>
+            <p class="text-xl text-blue-100 max-w-3xl mx-auto">
+                Complete your registration in just a few simple steps and start your STEM journey today.
+            </p>
+        </div>
+    </section>
+
+    <!-- Registration Form -->
+    <section class="py-12 bg-white">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Progress Indicator -->
+            <div class="mb-12">
+                <div class="flex justify-center items-center space-x-4 mb-6">
+                    <div class="step-indicator active w-12 h-12 rounded-full flex items-center justify-center font-bold bg-gray-200 text-gray-600" data-step="1">1</div>
+                    <div class="w-16 h-1 bg-gray-200"></div>
+                    <div class="step-indicator w-12 h-12 rounded-full flex items-center justify-center font-bold bg-gray-200 text-gray-600" data-step="2">2</div>
+                    <div class="w-16 h-1 bg-gray-200"></div>
+                    <div class="step-indicator w-12 h-12 rounded-full flex items-center justify-center font-bold bg-gray-200 text-gray-600" data-step="3">3</div>
+                    <div class="w-16 h-1 bg-gray-200"></div>
+                    <div class="step-indicator w-12 h-12 rounded-full flex items-center justify-center font-bold bg-gray-200 text-gray-600" data-step="4">4</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-sm text-gray-500 mb-2">Step <span id="current-step">1</span> of 4</div>
+                    <div class="w-full bg-gray-200 rounded-full h-2">
+                        <div id="progress-bar" class="progress-bar bg-blue-600 h-2 rounded-full" style="width: 25%"></div>
+                    </div>
+                </div>
+            </div>
+
+            <form id="registration-form" class="bg-white rounded-2xl shadow-lg p-8">
+                <!-- Step 1: Student Information -->
+                <div class="form-step active" data-step="1">
+                    <h2 class="text-2xl font-bold text-gray-900 mb-6 text-center">Student Information</h2>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">First Name *</label>
+                            <input type="text" id="first-name" class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" required>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Last Name *</label>
+                            <input type="text" id="last-name" class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" required>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Date of Birth *</label>
+                            <input type="date" id="dob" class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" required>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Grade Level *</label>
+                            <select id="grade-level" class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" required>
+                                <option value="">Select Grade Level</option>
+                                <option value="K">Kindergarten</option>
+                                <option value="1">Grade 1</option>
+                                <option value="2">Grade 2</option>
+                                <option value="3">Grade 3</option>
+                                <option value="4">Grade 4</option>
+                                <option value="5">Grade 5</option>
+                                <option value="6">Grade 6</option>
+                                <option value="7">Grade 7</option>
+                                <option value="8">Grade 8</option>
+                                <option value="9">Grade 9</option>
+                                <option value="10">Grade 10</option>
+                                <option value="11">Grade 11</option>
+                                <option value="12">Grade 12</option>
+                            </select>
+                        </div>
+                        <div class="md:col-span-2">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">School Name</label>
+                            <input type="text" id="school-name" class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                        </div>
+                        <div class="md:col-span-2">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Previous STEM Experience</label>
+                            <textarea id="stem-experience" rows="3" class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="Tell us about any previous STEM activities, clubs, or programs..."></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 2: Parent/Guardian Information -->
+                <div class="form-step" data-step="2">
+                    <h2 class="text-2xl font-bold text-gray-900 mb-6 text-center">Parent/Guardian Information</h2>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Parent/Guardian Name *</label>
+                            <input type="text" id="parent-name" class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" required>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Relationship to Student *</label>
+                            <select id="relationship" class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" required>
+                                <option value="">Select Relationship</option>
+                                <option value="parent">Parent</option>
+                                <option value="guardian">Guardian</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Email Address *</label>
+                            <input type="email" id="parent-email" class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" required>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Phone Number *</label>
+                            <input type="tel" id="parent-phone" class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" required>
+                        </div>
+                        <div class="md:col-span-2">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Emergency Contact</label>
+                            <input type="text" id="emergency-contact" class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="Name and phone number">
+                        </div>
+                        <div class="md:col-span-2">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Special Considerations</label>
+                            <textarea id="special-considerations" rows="3" class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="Any allergies, learning differences, or other important information..."></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 3: Program Selection -->
+                <div class="form-step" data-step="3">
+                    <h2 class="text-2xl font-bold text-gray-900 mb-6 text-center">Select Your Program</h2>
+                    <div id="program-options" class="grid md:grid-cols-3 gap-6 mb-8">
+                        <!-- Program options will be populated based on grade level -->
+                    </div>
+                    
+                    <div id="course-selection" class="hidden">
+                        <h3 class="text-xl font-bold text-gray-900 mb-4">Choose Your Courses</h3>
+                        <div id="course-options" class="grid md:grid-cols-2 gap-4">
+                            <!-- Course options will be populated based on selected program -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 4: Schedule Selection -->
+                <div class="form-step" data-step="4">
+                    <h2 class="text-2xl font-bold text-gray-900 mb-6 text-center">Choose Your Schedule</h2>
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div>
+                            <h3 class="text-lg font-semibold text-gray-900 mb-4">Available Time Slots</h3>
+                            <div id="schedule-options" class="space-y-3">
+                                <!-- Schedule options will be populated based on selected program -->
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-semibold text-gray-900 mb-4">Registration Summary</h3>
+                            <div id="registration-summary" class="bg-gray-50 p-6 rounded-lg">
+                                <div class="space-y-3">
+                                    <div class="flex justify-between">
+                                        <span class="text-gray-600">Student:</span>
+                                        <span id="summary-student" class="font-medium">-</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span class="text-gray-600">Program:</span>
+                                        <span id="summary-program" class="font-medium">-</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span class="text-gray-600">Courses:</span>
+                                        <span id="summary-courses" class="font-medium">-</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span class="text-gray-600">Schedule:</span>
+                                        <span id="summary-schedule" class="font-medium">-</span>
+                                    </div>
+                                    <hr class="my-4">
+                                    <div class="flex justify-between text-lg font-bold">
+                                        <span>Total Monthly Fee:</span>
+                                        <span id="summary-total" class="text-blue-600">$0</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-6">
+                                <label class="flex items-center">
+                                    <input type="checkbox" id="terms-agreement" class="mr-3 w-4 h-4 text-blue-600">
+                                    <span class="text-sm text-gray-600">
+                                        I agree to the <a href="#" class="text-blue-600 hover:underline">Terms and Conditions</a> 
+                                        and <a href="#" class="text-blue-600 hover:underline">Privacy Policy</a>
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Navigation Buttons -->
+                <div class="flex justify-between mt-8 pt-6 border-t border-gray-200">
+                    <button type="button" id="prev-btn" class="hidden px-6 py-3 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors">
+                        Previous
+                    </button>
+                    <div class="flex-1"></div>
+                    <button type="button" id="next-btn" class="px-8 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+                        Next Step
+                    </button>
+                    <button type="submit" id="submit-btn" class="hidden px-8 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors">
+                        Complete Registration
+                    </button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <!-- Success Modal -->
+    <div id="success-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+        <div class="bg-white rounded-2xl p-8 max-w-md mx-4 text-center">
+            <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+            </div>
+            <h3 class="text-2xl font-bold text-gray-900 mb-4">Registration Successful!</h3>
+            <p class="text-gray-600 mb-6">
+                Thank you for registering with STEM Academy. We'll contact you within 24 hours to confirm your enrollment and provide next steps.
+            </p>
+            <button id="close-modal" class="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+                Continue
+            </button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center space-x-3 mb-4">
+                        <img src="resources/logo.png" alt="STEM Academy Logo" class="h-8 w-8">
+                        <span class="text-lg font-bold">STEM Academy</span>
+                    </div>
+                    <p class="text-gray-400">
+                        Empowering the next generation of innovators through exceptional STEM education.
+                    </p>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Programs</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="programs.html#elementary" class="hover:text-white transition-colors">Elementary School</a></li>
+                        <li><a href="programs.html#junior" class="hover:text-white transition-colors">Junior High School</a></li>
+                        <li><a href="programs.html#senior" class="hover:text-white transition-colors">Senior High School</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Quick Links</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="registration.html" class="hover:text-white transition-colors">Registration</a></li>
+                        <li><a href="about.html" class="hover:text-white transition-colors">About Us</a></li>
+                        <li><a href="about.html#contact" class="hover:text-white transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Contact Info</h3>
+                    <div class="space-y-2 text-gray-400">
+                        <p>📧 info@stemacademy.edu</p>
+                        <p>📞 (555) 123-4567</p>
+                        <p>📍 123 Education Blvd, Science City, SC 12345</p>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2025 STEM Academy. All rights reserved. Empowering future innovators.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="main.js"></script>
+</body>
+</html>
